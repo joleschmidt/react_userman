@@ -1,5 +1,5 @@
 import React, {useState, useRef, useEffect} from 'react';
-import {Form, Button, Row, Col, Container, Modal} from 'react-bootstrap';
+import {Form, Button, Container} from 'react-bootstrap';
 import {User} from "../model/User";
 
 const LOCAL_STORAGE_KEY = 'USER_KEY';
@@ -54,6 +54,7 @@ function Hinzufuegen(props: {users: User[]}) {
                             ref={fNameRef}
                             type="text "
                             placeholder="Vorname"
+                            onSubmit={handleAddUser}
                             style={{margin: '8px 0'}}/>
                     </div>
                     <div className="lName-input">
@@ -63,6 +64,7 @@ function Hinzufuegen(props: {users: User[]}) {
                             ref={lNameRef}
                             type="text "
                             placeholder="Nachname"
+                            onSubmit={handleAddUser}
                             style={{margin: '8px 0'}}/>
                     </div>
                     <div className="discription-input">
@@ -74,7 +76,7 @@ function Hinzufuegen(props: {users: User[]}) {
                             placeholder="Beschreibung"
                             style={{margin: '8px 0'}}/>
                     </div>
-                    <Button onClick={handleAddUser}>
+                    <Button onClick={handleAddUser} >
                         Erstellen
                     </Button>
                 </Form>

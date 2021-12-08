@@ -1,19 +1,50 @@
-import React, {useEffect, useState} from 'react';
-import {Modal, Table, Button, Form} from 'react-bootstrap';
-import UserList from "./UserList";
+import React, {useEffect, useRef, useState} from 'react';
+import {Modal, Button, Form} from 'react-bootstrap';
 
 const LOCAL_STORAGE_KEY = 'USER_KEY';
 
 function EditModal(props: any) {
     const {show, onClose} = props;
-    const [users, setUsers] = useState(props.users);
+    const [users, setUsers] = useState([]);
+    const {editUser} = props;
 
-    useEffect(() => {
+    const fNameRef = useRef<HTMLInputElement>(null);
+    const lNameRef = useRef<HTMLInputElement>(null);
+    const discRef = useRef<HTMLInputElement>(null);
+
+/*    useEffect(() => {
         const storedUsers = localStorage.getItem(LOCAL_STORAGE_KEY);
         if (storedUsers) {
             setUsers(JSON.parse(storedUsers));
         }
     }, []);
+*/
+    useEffect(() => {
+        localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(users));
+    }, [users]);
+
+/*    const handleEditUser = () => {
+        const fName = fNameRef.current!.value;
+        const lName = lNameRef.current!.value;
+        const disc = discRef.current!.value;
+        const id = editUser.id;
+
+
+        if (fName === '' || lName === '' || disc === '') {
+            alert('...!');
+
+        } else {
+            alert(fName + ' wurde geändert!');
+            console.log(fName, lName, disc);
+            setUsers(
+                users.map((editUser: any) =>
+                    editUser.id === users.id
+                        ? {...editUser, someProp : "changed"}
+                        : editUser
+                ))
+            onClose()
+        }
+    }*/
 
     return (
         <div>
@@ -27,29 +58,49 @@ function EditModal(props: any) {
                             <label>Vorname</label>
                             <Form.Control
                                 name="fName"
+                                ref={fNameRef}
                                 type="text "
-                                placeholder="{users.fName}"
+                                placeholder={editUser.fname}
+                                onChange={(e) => {
+                                    editUser.fname = e.target.value
+                                    setUsers([...users])
+                                    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(users));
+                                }}
                                 style={{margin: '8px 0'}}/>
                         </div>
                         <div className="lName-input">
                             <label>Nachname</label>
                             <Form.Control
                                 name="lName"
+                                ref={lNameRef}
                                 type="text "
-                                placeholder="{user.lname}"
+                                placeholder={editUser.lname}
+                                onChange={(e) => {
+                                    editUser.lname = e.target.value
+                                    setUsers([...users])
+                                    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(users));
+                                }}
                                 style={{margin: '8px 0'}}/>
                         </div>
                         <div className="discription-input">
                             <label>Beschreibung</label>
                             <Form.Control
                                 name="discription"
+                                ref={discRef}
                                 type="text"
-                                placeholder="{user.discription}"
+                                placeholder={editUser.discription}
+                                onChange={(e) => {
+                                    editUser.discription = e.target.value
+                                    setUsers([...users])
+                                    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(users));
+                                }}
                                 style={{margin: '8px 0'}}/>
                         </div>
                     </Form>
+{/*
                     <Button variant="secondary" onClick={onClose}>Close</Button>
-                    <Button className="m-3" variant="primary">Save changes</Button>
+*/}
+                    <Button variant="primary" onClick={onClose}>Save changes</Button>
                 </Modal.Body>
             </Modal>
         </div>
