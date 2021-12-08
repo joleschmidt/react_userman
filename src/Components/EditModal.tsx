@@ -12,39 +12,12 @@ function EditModal(props: any) {
     const lNameRef = useRef<HTMLInputElement>(null);
     const discRef = useRef<HTMLInputElement>(null);
 
-/*    useEffect(() => {
-        const storedUsers = localStorage.getItem(LOCAL_STORAGE_KEY);
-        if (storedUsers) {
-            setUsers(JSON.parse(storedUsers));
-        }
-    }, []);
-*/
+
+
     useEffect(() => {
         localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(users));
     }, [users]);
 
-/*    const handleEditUser = () => {
-        const fName = fNameRef.current!.value;
-        const lName = lNameRef.current!.value;
-        const disc = discRef.current!.value;
-        const id = editUser.id;
-
-
-        if (fName === '' || lName === '' || disc === '') {
-            alert('...!');
-
-        } else {
-            alert(fName + ' wurde geändert!');
-            console.log(fName, lName, disc);
-            setUsers(
-                users.map((editUser: any) =>
-                    editUser.id === users.id
-                        ? {...editUser, someProp : "changed"}
-                        : editUser
-                ))
-            onClose()
-        }
-    }*/
 
     return (
         <div>
@@ -54,6 +27,14 @@ function EditModal(props: any) {
                 </Modal.Header>
                 <Modal.Body>
                     <Form>
+                        <div className="id-input">
+                            <label>Id</label>
+                            <Form.Control
+                                name="id"
+                                type="text"
+                                value={editUser.id}
+                                style={{margin: '8px 0'}}/>
+                        </div>
                         <div className="fName-input">
                             <label>Vorname</label>
                             <Form.Control
@@ -64,7 +45,6 @@ function EditModal(props: any) {
                                 onChange={(e) => {
                                     editUser.fname = e.target.value
                                     setUsers([...users])
-                                    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(users));
                                 }}
                                 style={{margin: '8px 0'}}/>
                         </div>
@@ -78,7 +58,6 @@ function EditModal(props: any) {
                                 onChange={(e) => {
                                     editUser.lname = e.target.value
                                     setUsers([...users])
-                                    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(users));
                                 }}
                                 style={{margin: '8px 0'}}/>
                         </div>
@@ -92,7 +71,6 @@ function EditModal(props: any) {
                                 onChange={(e) => {
                                     editUser.discription = e.target.value
                                     setUsers([...users])
-                                    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(users));
                                 }}
                                 style={{margin: '8px 0'}}/>
                         </div>

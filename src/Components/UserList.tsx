@@ -47,7 +47,7 @@ function UserList(props: any) {
                         <td>{user.fname}</td>
                         <td>{user.lname}</td>
                         <td>{user.discription}</td>
-                        <td>Datum</td>
+                        <td>{user.date}</td>
                         <td>
                             <button className="btn btn-info" onClick={() => handleShow(user)}>Edit</button>
                         </td>
