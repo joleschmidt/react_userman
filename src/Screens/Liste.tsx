@@ -4,7 +4,6 @@ import {Container, Table} from 'react-bootstrap';
 // Importing the component
 import UserList from '../Components/UserList';
 import {User} from '../model/User';
-import Hinzufuegen from "./Hinzufuegen";
 const LOCAL_STORAGE_KEY = 'USER_KEY';
 
 
